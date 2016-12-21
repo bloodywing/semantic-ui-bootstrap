@@ -50,30 +50,18 @@
     @keyframes $name { @content; }
 }
 
-@mixin for($i) {
-  @include -each($i);
-}
-/*
-@mixin for($n)     when (isnumber($n)) {.for(1, $n)}
-@mixin for($i, $n) when not ($i = $n)  {
-    @include for(($i + ($n - $i) / abs($n - $i)), $n);
-}
-@mixin for($array)   when (default()) {@include for-impl_(length($array))}
-@mixin for-impl_($i) when ($i > 1)    {@include for-impl_(($i - 1))}
-@mixin for-impl_($i) when ($i > 0)    {@include -each(nth($array, $i))}
-*/
-$color-primary: #3ac0ff;
-$color-info: #8a73ff;
-$color-success: #22be34;
-$color-danger: #d01919;
-$color-warning: #ff851b;
+$color-primary: #3ac0ff !default;
+$color-info: #8a73ff !default;
+$color-success: #22be34 !default;
+$color-danger: #d01919 !default;
+$color-warning: #ff851b !default;
 
-$alert-color-primary: #F8FFFF, #A9D5DE, #276f86; // [1] Background-color, [2] border-color, [3] font color
-$alert-color-info: #F1EFFF, #CBC4FC, #6435C9;
-$alert-color-success: #FCFFF5, #A3C293, #2c662d;
-$alert-color-danger: #FFF6F6, #E0B4B4, #9F3A38;
-$alert-color-warning: #FFFAF3, #C9BA9B, #573a08;
+$alert-color-primary: #F8FFFF, #A9D5DE, #276f86 !default; // [1] Background-color, [2] border-color, [3] font color
+$alert-color-info: #F1EFFF, #CBC4FC, #6435C9 !default;
+$alert-color-success: #FCFFF5, #A3C293, #2c662d !default;
+$alert-color-danger: #FFF6F6, #E0B4B4, #9F3A38 !default;
+$alert-color-warning: #FFFAF3, #C9BA9B, #573a08 !default;
 
-$sidebar-width: 250px;
+$sidebar-width: 250px !default;
 
 $brand: primary,info,success,danger,warning;

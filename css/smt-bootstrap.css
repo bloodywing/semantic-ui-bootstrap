@@ -9,15 +9,6 @@
  * http://opensource.org/licenses/MIT
  *
  */
-/*
-@mixin for($n)     when (isnumber($n)) {.for(1, $n)}
-@mixin for($i, $n) when not ($i = $n)  {
-    @include for(($i + ($n - $i) / abs($n - $i)), $n);
-}
-@mixin for($array)   when (default()) {@include for-impl_(length($array))}
-@mixin for-impl_($i) when ($i > 1)    {@include for-impl_(($i - 1))}
-@mixin for-impl_($i) when ($i > 0)    {@include -each(nth($array, $i))}
-*/
 .card, .cards, .cards > .card {
   display: -webkit-box;
   display: -webkit-flex;
