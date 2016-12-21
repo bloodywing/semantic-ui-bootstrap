@@ -1,0 +1,365 @@
+/*!
+ * # SMTB - Semantic UI Bootstrap
+ * Version v3.1.2
+ * http://github.com/cblweb/semantic-ui-bootstrap/
+ * Inspired by Semantic UI
+ *
+ * Copyright 2016 cbl-web.com
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+@import 'mixin';
+@import 'component/card.scss';
+@import 'component/reveal.scss';
+@import 'component/label.scss';
+@import 'component/sidebar.scss';
+@import 'component/checkbox.scss';
+
+body { font-size: 14px; }
+
+a, .btn-link { color: darken($color-primary,20%);
+	&:hover { color: $color-primary; text-decoration: none; }
+}
+
+//***************** Dropdown, button-group ***********
+@media(min-width: 768px) {
+	.dropdown, .btn-group {
+		.dropdown-menu {
+			display: block;
+			@include transform-origin(center top);
+			@include transition;
+			@include transform(scaleY(0));
+			opacity: 0;
+		}
+		&.open > .dropdown-menu, &.dropdown-hover:hover > .dropdown-menu {
+			@include transform(scaleY(1));
+			opacity: 1;
+		}
+	}
+}
+.navbar-default .navbar-nav > .dropdown-hover:hover {
+	>a,>a:hover,>a:focus {
+		color: #555; background-color: #e7e7e7;
+	}
+}
+.navbar-inverse .navbar-nav > .dropdown-hover:hover {
+	>a,>a:hover,>a:focus {
+		color: #FFF; background-color: #080808;
+	}
+}
+.dropdown-submenu { position:relative;
+	>.dropdown-menu { top:0; left:100%; margin-top:-6px; margin-left:-1px; border-radius:0 6px 6px 6px; }
+	@media(max-width: 767px) {
+		>.dropdown-menu { margin-left: 20px; }
+		.open &:hover > .dropdown-menu { display: block; }
+	}
+	&:hover>.dropdown-menu { @include transform(scaleY(1)); opacity: 1; }
+	>a:after {
+	    display:block;
+	    content:"";
+	    float:right;
+	    width:0;
+	    height:0;
+	    border-color:transparent;
+	    border-style:solid;
+	    border-width:5px 0 5px 5px;
+	    border-left-color:#AAA;
+	    margin-top:5px;
+	    margin-right:-10px;
+	}
+}
+
+//************** Forms ******************
+.form-control {
+  @include box-shadow(none);
+}
+.form-control:focus {
+  @include box-shadow(none);
+}
+.form-group.has-success {
+	.control-label { color: $color-success; }
+	.form-control { border-color: $color-success;
+		&:focus, &:active { background-color: fade($color-success,5%); @include box-shadow(none); }
+	}
+}
+.form-group.has-error {
+	.control-label { color: $color-danger; }
+	.form-control { border-color: $color-danger;
+		&:focus, &:active { background-color: fade($color-danger,5%); @include box-shadow(none); }
+	}
+}
+.form-group.has-warning {
+	.control-label { color: $color-warning; }
+	.form-control { border-color: $color-warning;
+		&:focus, &:active { background-color: fade($color-warning,5%); @include box-shadow(none); }
+	}
+}  
+
+
+//************** Button ******************
+.btn { border: 0; @include transition(); padding: 7px 12px; line-height: 20px;
+	[class*=btn-icon] { display: inline-block; margin: -7px 12px; padding: 7px 12px; line-height: 20px; background-color: rgba(0,0,0,.08); }
+	.btn-icon-left { margin-left: -12px; }
+	.btn-icon-right { margin-right: -12px; }
+}
+.btn-xs { padding: 2px 5px;
+	[class*=btn-icon] { margin: -2px 5px; padding: 2px 5px; }
+	.btn-icon-left { margin-left: -5px; }
+	.btn-icon-right { margin-right: -5px; }
+}
+.btn-sm { padding: 6px 10px;
+	[class*=btn-icon] { margin: -6px 10px; padding: 6px 10px; }
+	.btn-icon-left { margin-left: -10px; }
+	.btn-icon-right { margin-right: -10px; }
+}
+.btn-lg { padding: 11px 16px;
+	[class*=btn-icon] { margin: -11px 16px; padding: 11px 16px; }
+	.btn-icon-left { margin-left: -16px; }
+	.btn-icon-right { margin-right: -16px; }
+}
+
+.btn-default {
+	background-color: #DDD;
+	&:hover, &:active, &:focus, &.active { background-color: #e0e1e2; }
+}
+.btn-inverted.btn-default { @include box-shadow(0 0 0 1px #CCC inset);
+	&:hover, &:active, &:focus, &.active { background-color: #e0e1e2; }
+	&.btn-bold { @include box-shadow(0 0 0 2px #e0e1e2 inset);
+		&:hover, &:active, &:focus, &.active { @include box-shadow(0 0 0 2px #e0e1e2 inset); }
+	}
+}
+
+@mixin btn-variant($name, $color-name) {
+
+	.btn-#{$name} {
+		background-color: $color-name;
+		&:hover, &:active, &:hover:active, &:focus, &.active { background-color: darken($color-name, 8%); }
+	}
+
+	.btn-group .btn-#{$name} ~ .dropdown-menu > li > a {
+		&:hover,&:focus { background-color: $color-name; color: #FFF; }
+	}
+
+	.open > .dropdown-toggle.btn-#{$name} { background-color: darken($color-name, 5%) !important; }
+	.btn-inverted.btn-#{$name} { @include box-shadow(0 0 0 1px $color-name inset); color: $color-name;
+		&:hover, &:active, &:focus, &.active { background-color: $color-name; @include box-shadow(0 0 0 1px $color-name inset); color: #FFF; }
+		&.btn-bold { @include box-shadow(0 0 0 2px $color-name inset);
+			&:hover, &:active, &:focus, &.active { @include box-shadow(0 0 0 2px $color-name inset); }
+		}
+	}
+	.btn-inverted-white.btn-#{$name} {
+		&:hover, &:active, &:focus, &.active { @include box-shadow(0 0 0 2px $color-name inset); color: $color-name; }
+	}
+	.btn-inverted-white-fill.btn-#{$name} {
+		&:hover, &:active, &:focus, &.active { background-color: $color-name; @include box-shadow(0 0 0 2px $color-name inset); color: #FFF; }
+	}
+}
+
+@include btn-variant('primary', $color-primary);
+@include btn-variant('danger', $color-danger);
+@include btn-variant('warning', $color-warning);
+@include btn-variant('info', $color-info);
+@include btn-variant('success', $color-success);
+
+.btn.btn-inverted { background-color: transparent; }
+.btn.btn-inverted-white { font-weight: bold; @include box-shadow(0 0 0 2px #FFF inset); color: #FFF; border-color: #FFF; background-color: transparent !important; }
+.btn.btn-inverted-white-fill { font-weight: bold; @include box-shadow(0 0 0 2px #FFF inset); color: #FFF; background-color: transparent; }
+.btn-bold { font-weight: 600; }
+.btn-circular { border-radius: 50%; }
+
+//*********** Table ************
+@mixin table-variant($name, $color-name) {
+	.table > tfoot >, .table > thead >, .table > tbody > {
+		tr {
+			> td.#{$name}, > th.#{$name} {
+				background-color: $color-name; color: #FFF;
+			}
+			&:hover {
+				> td.#{$name}, > th.#{$name} {
+					background-color: darken($color-name, 5%); color: #FFF;
+				}
+			}
+		}
+		tr.#{$name} {
+			> td, > th {
+				background-color: $color-name; color: #FFF;
+			}
+			&:hover {
+				> td, > th {
+					background-color: darken($color-name, 5%); color: #FFF;
+				}
+			}
+		}
+	}
+}
+
+@include table-variant('primary', $color-primary);
+@include table-variant('danger', $color-danger);
+@include table-variant('warning', $color-warning);
+@include table-variant('info', $color-info);
+@include table-variant('success', $color-success);
+
+//*********** Text ************
+
+@mixin text-variant($name, $color-name) {
+	.text-#{$name} { color: $color-name; }
+}
+
+@include text-variant('primary', $color-primary);
+@include text-variant('danger', $color-danger);
+@include text-variant('warning', $color-warning);
+@include text-variant('info', $color-info);
+@include text-variant('success', $color-success);
+
+
+//*********** nav-pills, pagination, tabs ************
+.nav-pills > li.active {
+	> a, > a:hover, > a:focus { background-color: $color-primary; }
+}
+.pagination > .active {
+	> a, > span, > a:hover, > span:hover, > a:focus, > span:focus { background-color: $color-primary; border-color: $color-primary; }
+}
+.dropdown-menu > .active {
+	> a, > a:hover, > a:focus { background-color: $color-primary; }
+}
+
+
+//*********** Alert ************
+.alert-dark { color: #FFF;
+	.alert-link { color: #FFF !important; text-decoration: none;
+		&:hover { border-bottom-style: solid; }
+	}
+}
+
+@mixin alert-variant($name, $color-name, $alert-color-name) {
+	.alert-#{$name} { background-color: nth($alert-color-name,1); border-color: nth($alert-color-name,2);
+		&, .alert-link { color: nth($alert-color-name,3); }
+	}
+	.alert-dark.alert-#{$name} { background-color: $color-name; border-color: $color-name;
+		.alert-link { border-bottom: 1px dotted rgba(255,255,255,0.8); }
+	}
+}
+
+@include alert-variant('primary', $color-primary, $alert-color-primary);
+@include alert-variant('danger', $color-danger, $alert-color-danger);
+@include alert-variant('warning', $color-warning, $alert-color-warning);
+@include alert-variant('info', $color-info, $alert-color-info);
+@include alert-variant('success', $color-success, $alert-color-success);
+
+.close { opacity: 0.5; }
+
+
+//*********** progress bar ************
+.progress-bar { background-color: $color-primary; }
+@mixin progress-bar-variant($name, $color-name) {
+	.progress-bar.progress-bar-#{$name} { background-color: $color-name; }
+}
+@include progress-bar-variant('primary', $color-primary);
+@include progress-bar-variant('danger', $color-danger);
+@include progress-bar-variant('warning', $color-warning);
+@include progress-bar-variant('info', $color-info);
+@include progress-bar-variant('success', $color-success);
+
+
+//*********** List Group ************
+.list-group-item {
+	&.active, &.active:hover, &.active:focus { background-color: $color-primary; border-color: $color-primary; }
+}
+
+
+//*********** Well *************
+.well { position: relative; background-color: #FFF; @include box-shadow(0 1px 2px 0 rgba(34,36,38,.15)); border-color: rgba(34,36,38,.15); }
+
+//*********** Tag **************
+.nav-tabs {
+	> li:not(.active) > a { background-color: transparent !important; border: 0 !important; }
+	&.tabs-material { border-bottom: 2px solid #DDD;
+		> li > a { color: #555 !important; background-color: transparent !important; position: relative; margin: 0; border: 0 !important;
+			&:after { content: ""; @include transform(scaleX(0)); @include transition; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background-color: $color-primary; }
+		}
+		> li:hover >a, >li > a:focus, >li.active >a {
+			&:after { @include transform(scaleX(1)); }
+		}
+		+ .tab-content { margin-top: 15px; border-top-width: 1px; border-radius: 4px; }
+	}
+}
+.tab-content { padding: 10px; border: 1px solid #ddd; border-top-width: 0; border-radius: 0 0 4px 4px; }
+
+//*********** Panel ************
+.progress-bar { background-color: $color-primary; }
+@mixin panel-variant($name, $color-name) {
+		.panel-#{$name} { border-color: $color-name;
+		> .panel-heading { background-color: $color-name; border-color: $color-name; color: #FFF; }
+	}
+}
+@include panel-variant('primary', $color-primary);
+@include panel-variant('danger', $color-danger);
+@include panel-variant('warning', $color-warning);
+@include panel-variant('info', $color-info);
+@include panel-variant('success', $color-success);
+
+.panel-accordion {
+	.panel, .panel .panel-heading { margin: 0 !important; border-radius: 0; }
+	.panel:first-child, .panel:first-child .panel-heading { border-top-left-radius: 3px; border-top-right-radius: 3px; }
+	.panel:last-child, .panel:last-child .panel-heading { border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; }
+	.panel + .panel { margin-top: -1px !important; }
+	.panel {
+		> .panel-heading { padding: .75em 1em; border-bottom: 0;
+			>.panel-title { font-size: 1em; font-weight: 700;
+				> a { padding-left: 15px; position: relative; color: #FFF;
+					&:before {
+						display:block;
+					    content:" ";
+					    width:0;
+					    height:0;
+					    border-color:transparent;
+					    border-style:solid;
+					    border-width:4px 4px 0 4px;
+					    border-top-color:#FFF;
+					    margin-top:6px;
+					    position: absolute;
+					    left: 0;
+					    top: 0;
+					    @include transition;
+					    @include transform-origin(center center);
+					    @include transform(rotate(0));
+					}
+					&.collapsed:before { @include transform(rotate(-90deg)); }
+				}
+			}
+		}
+		> .panel-collapse > .panel-body { border-top: 0; }
+	}
+	.panel-default > .panel-heading { background-color: #FFF;
+		>.panel-title > a { color: #555;
+			&:before { border-top-color:#888; }
+		}
+	}
+}
+
+//************** Divider *************
+.bs-divider { margin: 20px 0; border: 0; display: table; white-space: nowrap; font-size: 1.1em;
+	&:before, &:after {
+		content: ""; padding: 0 20px; position: relative; display: table-cell; width: 50%; top: 50%;
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC) no-repeat center center;
+	}
+	&:before { background-position: right 1em top 50%; }
+	&:after { background-position: left 1em top 50%; }
+}
+.btn-group.btn-divided .btn {
+	&:after { content: ''; display: inline-block; width: 8px; }
+	&:before { content: ''; display: inline-block; width: 8px; }
+	&:first-child:before { width: 0; }
+	&:last-child:after { width: 0; }
+	i[data-text] {
+		width: 3px; height: 100%; background-color: #FFF; margin: 0; padding: 0; position: absolute; top: 0; right: -1.5px;
+		font-size: 12px; font-weight: bold; font-style: normal; text-align: center; z-index: 3;
+	}
+	i[data-text]:after {
+		content: attr(data-text); border-radius: 50%; background-color: #FFF; position: absolute; top: 50%; left: 50%;
+		z-index: 4; width: 24px; height: 24px; line-height: 24px; color: #666; margin-top: -12px; margin-left: -12px;
+	}
+}
+//************** Divider *************
